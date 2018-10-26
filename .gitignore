@@ -4,4 +4,4 @@
 *.xlsx
 *.log
 *.key
-*.exe
+/bin/*
