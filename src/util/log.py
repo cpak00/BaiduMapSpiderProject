@@ -16,7 +16,7 @@ def getLogger(filename, log_rank=logging.WARNING):
     logger.setLevel(logging.INFO)
     # 创建Handler
     localdate = time.strftime('%Y-%m-%d_', time.localtime(time.time()))
-    fh = logging.FileHandler(localdate+filename, mode='a', encoding='gbk')
+    fh = logging.FileHandler(localdate+filename, mode='a', encoding='utf-8')
     fh.setLevel(log_rank)
     formatter = logging.Formatter(
         '''%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s:
