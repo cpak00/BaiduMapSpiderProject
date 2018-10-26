@@ -54,10 +54,17 @@ class Deamon:
     # 避免出现nan
     def clear_nan(self, result):
         successful = []
-        pre_list = str(result.loc[result.index[0], '已完成']).split(',')
-        for bar in pre_list:
-            if bar.strip() and bar.strip() != 'nan':
-                successful.append(bar.strip())
+        if isinstance(result, list):
+            for bar in result:
+                if bar and bar.strip() and bar.strip() != 'nan':
+                    successful.append(bar.strip())
+        elif isinstance(result, pd.DataFrame) or isinstance(result, pd.Series):
+            pre_list = str(result.loc[result.index[0], '已完成']).split(',')
+            for bar in pre_list:
+                if bar and bar.strip() and bar.strip() != 'nan':
+                    successful.append(bar.strip())
+        else:
+            successful = result
             
         return successful
 
