@@ -37,7 +37,11 @@ class Storage:
             else:
                 # 选取存储
                 columns = config.content_output_map[collect_name].values()
-                data.to_excel(writer, sheet_name=sheet_name, columns=columns, encoding='gbk')
+                data.to_excel(
+                    writer,
+                    sheet_name=sheet_name,
+                    columns=columns,
+                    encoding='gbk')
 
             # 存储
             writer.save()

@@ -36,14 +36,14 @@ content_output_map = {
         'hotel_price': '酒店最低价',
         'hotel_num': '酒店房间数'
     },
-    "bus": {
+    "metro": {
         'name': '地铁站名',
         'location': '地铁站坐标',
         'uid': '地铁站标识符',
         'address': '地铁站地址',
         'duration': '地铁站距离(m)'
     },
-    "metro": {
+    "bus": {
         'name': '公交车站名',
         'location': '公交车站坐标',
         'uid': '公交车站标识符',
