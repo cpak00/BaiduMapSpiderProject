@@ -217,7 +217,6 @@ class Parse:
         # 查找当前环境
         executable_path = '../bin/chromedriver'
         environment = ','.join(platform.architecture())
-        print('当前环境: %s' % (environment))
         if 'Windows' in environment:
             executable_path += '.exe'
 
