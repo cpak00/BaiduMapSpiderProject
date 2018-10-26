@@ -1,0 +1,1 @@
+nohup python3 deamon.py > main.log & echo $! > pid.txt
