@@ -2,12 +2,12 @@
 # 配置文件
 
 # 待爬取列表位置
-shop_filename = "E:/GuoDaProject/src/util/data/shop.xlsx"
+shop_filename = "./util/data/shop.xlsx"
 # 已爬取列表位置
-complete_filename = "E:/GuoDaProject/src/util/data/complete.xlsx"
+complete_filename = "./util/data/complete.xlsx"
 
 # 数据存储文件夹绝对位置
-output = "E:/GuoDaProject/out"
+output = "../out"
 
 # 爬取内容及对应距离(m)
 content = {"house": 1000, "hotel": 1000, "bus": 1000, "metro": 3000}

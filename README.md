@@ -67,10 +67,25 @@ baidu@cpak00
 4.在bin/目录中, 放置符合版本要求的[chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads)
 
 ### 安装第三方库
+
+linux
+```bash
+pip3 install numpy
+pip3 install pandas
+pip3 install requests
+pip3 install selenium
+pip3 install openpyxl
+pip3 install xlrd
+```
+
+windows
 ```bash
 pip install numpy
 pip install pandas
 pip install requests
+pip install selenium
+pip install selenium
+pip install xlrd
 ```
 
 ### 执行主进程
