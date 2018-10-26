@@ -17,7 +17,7 @@ def location_parse(location):
 
 
 def find_location(shop_name, address):
-    infos = map_handler.region_search(address_name, '', '上海')
+    infos = map_handler.region_search(address, '', '上海')
     if len(infos) > 0:
         location = location_parse(infos[0]['location'])
         real_name = infos[0]['name']
