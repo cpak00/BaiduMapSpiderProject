@@ -6,6 +6,7 @@ import re
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from util import log
+import platform
 
 
 logging = log.getLogger('api.log')
@@ -213,13 +214,20 @@ class Url:
 class Parse:
     # 构造函数 字典映射 键为json中的键 值为存储的列名
     def __init__(self, map):
+        # 查找当前环境
+        executable_path = '../bin/chromedriver'
+        environment = ','.join(platform.architecture())
+        print('当前环境: %s' % (environment))
+        if 'Windows' in environment:
+            executable_path += '.exe'
+
         # 配置服务器
         # headless Chrome
         chrome_options = Options()
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--disable-gpu')
         self.driver = webdriver.Chrome(
-            executable_path='../bin/chromedriver',
+            executable_path=executable_path,
             chrome_options=chrome_options)
 
         # PhantomJS
@@ -308,4 +316,4 @@ class ApiError(BaseException):
     def get_message(self):
         return self.json['message']
 
-pass
+    pass
