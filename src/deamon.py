@@ -29,7 +29,7 @@ class Deamon:
         logging.info('Deamon初始化完毕')
         return
 
-    # 等待日期变化
+    # 等待日期辩护
     def wait_day(self):
         i = 0
         while True:
@@ -43,6 +43,11 @@ class Deamon:
                 self.s_print('\n日期变化为%d' % (current_day))
                 self.localday = current_day
                 break
+
+    # 等待一小时
+    def wait_hour(self):
+        self.s_print('\r等待一小时')
+        time.sleep(60 * 60)
 
     def _read_list(self):
         logging.info('开始读取待爬信息和已爬信息')
@@ -95,14 +100,16 @@ class Deamon:
     def main(self):
         while True:
             try:
-                self.s_print('当前日期: %s\n' % (self.localday))
+                current_time = time.strftime("%Y-%m-%d %X", time.localtime())
+                self.s_print('当前时间: %s' % (current_time))
                 self.run()
             except ApiError as e:
                 self.s_print('意外终止\n')
                 reason = e.get_message()
                 self.s_print('终止原因: %s\n' % (reason))
                 if '配额超限' in reason or 'request over' in reason:
-                    self.wait_day()
+                    # self.wait_day()
+                    self.wait_hour()
                 else:
                     break
 
