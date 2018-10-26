@@ -218,8 +218,10 @@ class Parse:
         chrome_options = Options()
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--disable-gpu')
-        self.driver = webdriver.Chrome(chrome_options=chrome_options)
-        
+        self.driver = webdriver.Chrome(
+            executable_path='../bin/chromedriver',
+            chrome_options=chrome_options)
+
         # PhantomJS
         # self.driver = webdriver.PhantomJS()
 
