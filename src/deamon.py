@@ -51,17 +51,29 @@ class Deamon:
         logging.info('待爬信息和已爬信息读取完毕')
         return
 
+    # 避免出现nan
+    def clear_nan(self, result):
+        successful = []
+        pre_list = str(result.loc[result.index[0], '已完成']).split(',')
+        for bar in pre_list:
+            if bar.strip() and bar.strip() != 'nan':
+                successful.append(bar.strip())
+            
+        return successful
+
     # 获取以完成的结果
     def get_successful(self, real_name):
         result = self.complete.loc[self.complete['实际'] == real_name]
         if len(result) != 0:
-            return str(result.loc[result.index[0], '已完成']).split(',')
+            # 避免出现空值或nan
+            return self.clear_nan(result)
         else:
             return []
 
     # 存储以完成的结果
     def save_successful(self, real_name, successful):
         result = self.complete.loc[self.complete['实际'] == real_name]
+        successful = self.clear_nan(successful)
         successful = ','.join(successful)
         if len(result) != 0:
             self.complete.loc[result.index, '已完成'] = successful
