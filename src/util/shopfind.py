@@ -17,17 +17,17 @@ def location_parse(location):
 
 
 def find_location(shop_name, address):
-    infos = map_handler.region_search(shop_name, '', '上海')
+    infos = map_handler.region_search(address_name, '', '上海')
     if len(infos) > 0:
         location = location_parse(infos[0]['location'])
         real_name = infos[0]['name']
         print('查找:%s 实际:%s 位置:%s' % (shop_name, real_name, location))
         return real_name, location
     else:
-        '''
         # 已有数据, 节约额度
         print('没找到 %s' % (shop_name))
         return '', ''
+        
         '''
         # 常规
         infos = map_handler.region_search(address, '', '上海', get_all=False)
@@ -39,6 +39,7 @@ def find_location(shop_name, address):
         else:
             print('没找到 %s' % (shop_name))
             return '', ''
+        '''
 
 
 def find_all():
