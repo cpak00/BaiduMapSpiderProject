@@ -4,8 +4,8 @@ import requests
 import time
 import re
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from util import log
-import os
 
 
 logging = log.getLogger('api.log')
@@ -105,11 +105,12 @@ class Handler:
     # 获取请求信息
     def _get_result(self, url):
         error_flag = 0
+        json = {}
         while True:
             time.sleep(0.5)
             if (error_flag > self.error_max):
                 logging.error('错误次数超过{0}'.format(self.error_max))
-                self.on_error()
+                self.on_error(json)
                 break
             try:
                 r = requests.get(url)
@@ -134,11 +135,12 @@ class Handler:
         error_flag = 0
 
         total_results = []
+        json = {}
         while True:
             time.sleep(0.5)
             if (error_flag > self.error_max):
                 logging.error('错误次数超过{0}'.format(self.error_max))
-                self.on_error()
+                self.on_error(json)
                 break
             try:
                 url.set_param('page_num', page_num)
@@ -170,9 +172,9 @@ class Handler:
                 return None
         return total_results
 
-    def on_error(self):
-        print('错误超过{0}次, 已暂停'.format(self.error_max))
-        os.system('pause')
+    def on_error(self, json):
+        # print('错误超过{0}次, 已暂停'.format(self.error_max))
+        raise ApiError(json)
     pass
 
 
@@ -211,7 +213,16 @@ class Url:
 class Parse:
     # 构造函数 字典映射 键为json中的键 值为存储的列名
     def __init__(self, map):
-        self.driver = webdriver.PhantomJS()
+        # 配置服务器
+        # headless Chrome
+        chrome_options = Options()
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--disable-gpu')
+        self.driver = webdriver.Chrome(chrome_options=chrome_options)
+        
+        # PhantomJS
+        # self.driver = webdriver.PhantomJS()
+
         self.jsonMap = map
         self.raw = {}
         values = map.values()
@@ -281,3 +292,18 @@ class Parse:
         return str(lat) + ',' + str(lng)
 
     pass
+
+
+# api 错误句柄
+class ApiError(BaseException):
+    def __init__(self, json):
+        self.json = json
+        return
+
+    def get_json(self):
+        return self.json
+
+    def get_message(self):
+        return self.json['message']
+
+pass

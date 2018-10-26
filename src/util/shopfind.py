@@ -42,7 +42,7 @@ def find_location(shop_name, address):
 
 
 def find_all():
-    filename = "./util/data/国大上海门店表.xlsx"
+    filename = "./util/data/上海门店表.xlsx"
     df = pd.read_excel(filename)
 
     save = ''
@@ -76,5 +76,5 @@ def find_all():
         else:
             save = save.append(row, ignore_index=True)
         save.to_excel(save_filename)
-    save.to_excel(savesave_filename)
+    save.to_excel(save_filename)
     # complete.to_excel("./util/data/complete.xlsx")

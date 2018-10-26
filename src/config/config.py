@@ -6,11 +6,11 @@ shop_filename = "E:/GuoDaProject/src/util/data/shop.xlsx"
 # 已爬取列表位置
 complete_filename = "E:/GuoDaProject/src/util/data/complete.xlsx"
 
-# 爬取内容及对应距离(m)
-content = {"house": 1000, "hotel": 1000, "bus": 1000, "metro": 3000}
-
 # 数据存储文件夹绝对位置
 output = "E:/GuoDaProject/out"
+
+# 爬取内容及对应距离(m)
+content = {"house": 1000, "hotel": 1000, "bus": 1000, "metro": 3000}
 
 # 爬取内容中文映射
 content_zh_CN = {"house": "小区", "hotel": "酒店", "bus": "公交车站", "metro": "地铁站"}

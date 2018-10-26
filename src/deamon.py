@@ -1,10 +1,13 @@
 # -*-coding:utf-8-*-
 from spider import controllor
+from baidu.api import ApiError
 import pandas as pd
 import numpy as np
 from config import config
 from util import log
 from util import readkey
+import time
+import sys
 
 
 logging = log.getLogger('deamon.log', log.INFO)
@@ -13,6 +16,7 @@ logging = log.getLogger('deamon.log', log.INFO)
 class Deamon:
     def __init__(self):
         logging.info('Deamon初始化')
+        self.localday = int(time.strftime('%d', time.localtime()))
         self.ak_key = readkey.get_key()
         self.shop_filename = config.shop_filename
         self.complete_filename = config.complete_filename
@@ -20,6 +24,21 @@ class Deamon:
         self.main_controller = controllor.Controller(self.ak_key)
         logging.info('Deamon初始化完毕')
         return
+
+    # 等待日期变化
+    def wait_day(self):
+        i = 0
+        while True:
+            current_day = int(time.strftime('%d', time.localtime()))
+            if current_day == self.localday:
+                # 等待一小时
+                self.s_print('\r等待日期变化: %dh' % (i))
+                time.sleep(60 * 60)
+                i += 1
+            else:
+                self.s_print('\n日期变化为%d' % (current_day))
+                self.localday = current_day
+                break
 
     def _read_list(self):
         logging.info('开始读取待爬信息和已爬信息')
@@ -48,6 +67,21 @@ class Deamon:
                 '已完成': successful
             }, ignore_index=True)
         self.complete.to_excel(config.complete_filename)
+
+    # 守护api执行, 出错作出处理
+    def main(self):
+        while True:
+            try:
+                self.s_print('当前日期: %s\n' % (self.localday))
+                self.run()
+            except ApiError as e:
+                self.s_print('意外终止\n')
+                reason = e.get_message()
+                self.s_print('终止原因: %s\n' % (reason))
+                if '配额超限' in reason:
+                    self.wait_day()
+                else:
+                    break
 
     def run(self):
         logging.info('deamon开始运行')
@@ -98,7 +132,15 @@ class Deamon:
         logging.info('deamon运行结束, 共成功%d个, 失败%d个' % (successful_num, error_num))
         return
 
+    # 安全print
+    def s_print(self, *args, **kwargs):
+        try:
+            sys.stdout.write(*args, **kwargs)
+            sys.stdout.flush()
+        except Exception:
+            return
+
 
 if __name__ == '__main__':
     deamon = Deamon()
-    deamon.run()
+    deamon.main()

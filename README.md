@@ -4,8 +4,9 @@
 
 - [百度地图数据采集爬虫](#百度地图数据采集爬虫)
     - [项目简介](#项目简介)
+        - [开发语言](#开发语言)
         - [项目功能](#项目功能)
-        - [第三方库](#第三方库)
+        - [开发库及版本](#开发库及版本)
         - [开发者](#开发者)
     - [快速开始](#快速开始)
         - [初始配置](#初始配置)
@@ -16,28 +17,35 @@
     - [格式说明](#格式说明)
     - [模块说明](#模块说明)
         - [baidu](#baidu)
-            - [baidu/api](#baiduapi)
+            - [baidu.api](#baiduapi)
         - [spider](#spider)
-            - [collector](#collector)
-            - [controllor](#controllor)
-            - [storage](#storage)
+            - [spider.collector](#spidercollector)
+            - [spider.controllor](#spidercontrollor)
+            - [spider.storage](#spiderstorage)
     - [项目备注](#项目备注)
 
 <!-- /TOC -->
 
 ## 项目简介
 
+### 开发语言
+python3.5
+
 ### 项目功能
 使用百度地图的WebApi进行地图数据的采集
 
 
-### 第三方库
-使用requests库进行api调用
-
-使用pandas进行数据集处理
+### 开发库及版本
+第三方库 | 开发时版本 | 功能
+---------|------------|----------
+requests | 2.18.4     | 进行api调用
+pandas   | 0.20.3     | 数据集处理
+openpyxl | 2.5.5      | excel表格处理
 
 ### 开发者
+
 github@cpak00
+
 baidu@cpak00
 
 ## 快速开始
@@ -46,6 +54,7 @@ baidu@cpak00
 1.修改src/config/config.py中的配置(尤其注意文件的位置)
 2.创建src/baidu.key文件, 并在其第一行填上可用的百度地图api的ak_key
 3.在src/util/data/目录中, 放置符合[规定格式](#格式说明)的初始爬虫信息
+4.在bin/目录中, 放置符合版本要求的[chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads)
 
 ### 安装第三方库
 ```bash
@@ -113,7 +122,7 @@ config.content
 
 百度地图包
 
-#### baidu/api
+#### baidu.api
 
 百度地图api
 
@@ -135,7 +144,7 @@ map_handler.path_search('walk', org_location, dst_locations)
 
 爬虫主体包
 
-#### collector
+#### spider.collector
 
 数据收集器
 
@@ -147,7 +156,7 @@ collector.run('hotel', shop_name, shop_location, distance)
 
 ```
 
-#### controllor
+#### spider.controllor
 
 爬虫控制器
 
@@ -164,7 +173,7 @@ save_successful为存储已完成结果的句柄, 该方法用来存储已完成
 导致的重复爬取浪费api调用额度
 successful为已经成功的结果, 传入控制器用来过滤, 即不会执行爬取过程
 
-#### storage
+#### spider.storage
 
 数据存储器
 
