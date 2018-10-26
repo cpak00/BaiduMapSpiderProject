@@ -7,6 +7,7 @@
         - [开发语言](#开发语言)
         - [项目功能](#项目功能)
         - [开发库及版本](#开发库及版本)
+        - [第三方依赖](#第三方依赖)
         - [开发者](#开发者)
     - [快速开始](#快速开始)
         - [初始配置](#初始配置)
@@ -34,6 +35,8 @@ python3.5
 ### 项目功能
 使用百度地图的WebApi进行地图数据的采集
 
+使用selenium自动化运维工具控制~~phantomJS~~Chrome(Headless模式)爬取去哪儿网上的酒店床位以及最低价信息
+
 
 ### 开发库及版本
 第三方库 | 开发时版本 | 功能
@@ -41,6 +44,13 @@ python3.5
 requests | 2.18.4     | 进行api调用
 pandas   | 0.20.3     | 数据集处理
 openpyxl | 2.5.5      | excel表格处理
+selenium | 3.12.0     | 自动化网页运行
+
+### 第三方依赖
+
+* ~~phantomJS~~
+
+* ChromeDriver
 
 ### 开发者
 
@@ -188,3 +198,5 @@ storage.store(data, collect_name, distance)
 同sheet中, sheet名称为distance加collect_name的中文(在config中配置)
 
 ## 项目备注
+
+    1.建议备份complete_file, 在存储complete_file的过程中发生中断将导致complete_file无法挽回性的损坏
