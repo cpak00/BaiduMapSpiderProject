@@ -47,7 +47,7 @@ def find_all():
 
     save = ''
     save_filename = config.shop_filename
-    
+
     if not path.exists(save_filename):
         save = pd.DataFrame(columns=['查找', '实际', '坐标'])
     else:

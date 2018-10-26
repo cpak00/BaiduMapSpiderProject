@@ -28,7 +28,8 @@ class Storage:
             else:
                 writer = pd.ExcelWriter(self.output, engine='openpyxl')
 
-            sheet_name = str(distance) + str(config.content_zh_CN[collect_name])
+            sheet_name = str(distance) + str(
+                config.content_zh_CN[collect_name])
             # 如果为空
             if len(data) == 0:
                 # 直接进行存储
