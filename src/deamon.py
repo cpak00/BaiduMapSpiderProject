@@ -101,7 +101,7 @@ class Deamon:
                 self.s_print('意外终止\n')
                 reason = e.get_message()
                 self.s_print('终止原因: %s\n' % (reason))
-                if '配额超限' in reason:
+                if '配额超限' in reason or 'request over' in reason:
                     self.wait_day()
                 else:
                     break
