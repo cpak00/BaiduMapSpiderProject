@@ -33,11 +33,11 @@ class Storage:
             # 如果为空
             if len(data) == 0:
                 # 直接进行存储
-                data.to_excel(writer, sheet_name=sheet_name)
+                data.to_excel(writer, sheet_name=sheet_name, encoding='gbk')
             else:
                 # 选取存储
                 columns = config.content_output_map[collect_name].values()
-                data.to_excel(writer, sheet_name=sheet_name, columns=columns)
+                data.to_excel(writer, sheet_name=sheet_name, columns=columns, encoding='gbk')
 
             # 存储
             writer.save()
