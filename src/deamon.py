@@ -17,7 +17,7 @@ logging = log.getLogger('deamon.log', log.INFO)
 class Deamon:
     def __init__(self):
         environment = ','.join(platform.architecture())
-        print('当前环境: %s' % (environment))
+        self.s_print('当前环境: %s' % (environment))
 
         logging.info('Deamon初始化')
         self.localday = int(time.strftime('%d', time.localtime()))

@@ -64,7 +64,7 @@ baidu@cpak00
 1.修改src/config/config.py中的配置(尤其注意文件的位置)
 2.创建src/baidu.key文件, 并在其第一行填上可用的百度地图api的ak_key
 3.在src/util/data/目录中, 放置符合[规定格式](#格式说明)的初始爬虫信息
-4.在bin/目录中, 放置符合版本要求的[chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads)
+4.在bin/目录中, 放置符合版本要求的[chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads)和Chrome
 
 ### 安装第三方库
 
