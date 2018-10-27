@@ -1,4 +1,6 @@
 # -*-coding:utf-8-*-
+# 必须第一个引用chdir来改变环境
+import chdir
 from spider import controllor
 from baidu.api import ApiError
 import pandas as pd
@@ -173,5 +175,6 @@ class Deamon:
 
 
 if __name__ == '__main__':
+    chdir.print_chdir()
     deamon = Deamon()
     deamon.main()

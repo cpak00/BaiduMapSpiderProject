@@ -1,5 +1,4 @@
 # -*-coding:utf-8-*-
-# 配置文件
 
 # 待爬取列表位置
 shop_filename = "./util/data/shop.xlsx"
