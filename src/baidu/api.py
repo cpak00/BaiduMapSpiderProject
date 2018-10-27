@@ -276,7 +276,7 @@ class Parse:
             self.driver.get(url)
             id_pattern = re.search(r'dt-(\d+)', self.driver.page_source)
             id_ = id_pattern.group(1)
-            detail_url = 'https://hotel.qunar.com/city/shanghai_city/dt-{0}'
+            detail_url = 'http://hotel.qunar.com/city/shanghai_city/dt-{0}'
 
             r = requests.get(detail_url.format(id_))
             r.encoding = 'utf-8'
