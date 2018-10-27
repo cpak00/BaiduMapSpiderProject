@@ -5,7 +5,7 @@ from spider import storage
 from util import log
 
 
-logging = log.getLogger('controller', log.INFO)
+logging = log.getLogger('controller.log', log.INFO)
 
 
 class Controller:

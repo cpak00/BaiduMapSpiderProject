@@ -11,7 +11,7 @@ import sys
 import platform
 
 
-logging = log.getLogger('deamon', log.INFO)
+logging = log.getLogger('deamon.log', log.INFO)
 
 
 class Deamon:

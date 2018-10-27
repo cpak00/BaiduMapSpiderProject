@@ -9,7 +9,7 @@ from util import log
 import platform
 
 
-logging = log.getLogger('api')
+logging = log.getLogger('api.log')
 
 
 # 百度地图api
