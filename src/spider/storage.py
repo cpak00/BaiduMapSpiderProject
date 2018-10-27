@@ -5,7 +5,7 @@ from openpyxl import load_workbook
 from util import log
 
 
-logging = log.getLogger('storage', log.INFO)
+logging = log.getLogger('storage.log', log.INFO)
 
 
 class Storage:
