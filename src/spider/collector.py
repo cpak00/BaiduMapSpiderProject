@@ -5,7 +5,7 @@ from config import config
 from util import log
 
 
-logging = log.getLogger('collector.log', log.INFO)
+logging = log.getLogger('collector', log.INFO)
 
 
 # 安全的map取值

@@ -1,6 +1,7 @@
 # -*-coding:utf-8-*-
 import logging
-import time
+import logging.handlers
+# import time
 import sys
 
 
@@ -10,13 +11,19 @@ WARNING = logging.WARNING
 ERROR = logging.ERROR
 
 
-def getLogger(filename, log_rank=logging.WARNING):
+def getLogger(tag, log_rank=logging.WARNING):
     # 创建Logger
-    logger = logging.getLogger(filename)
+    logger = logging.getLogger(tag)
     logger.setLevel(logging.INFO)
     # 创建Handler
-    localdate = time.strftime('%Y-%m-%d_', time.localtime(time.time()))
-    fh = logging.FileHandler(localdate+filename, mode='a', encoding='utf-8')
+    # localdate = time.strftime('%Y-%m-%d_', time.localtime(time.time()))
+    # fh = logging.FileHandler(localdate+filename, mode='a', encoding='utf-8')
+    fh = logging.handlers.TimedRotatingFileHandler(
+        tag,
+        when='MIDNIGHT'
+    )
+    
+    fh.suffix = "_%Y-%m-%d.log"
     fh.setLevel(log_rank)
     formatter = logging.Formatter(
         '''%(asctime)s - %(filename)s[line:%(lineno)d] - %(levelname)s:

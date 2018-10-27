@@ -9,7 +9,7 @@ from util import log
 import platform
 
 
-logging = log.getLogger('api.log')
+logging = log.getLogger('api')
 
 
 # 百度地图api
@@ -33,7 +33,7 @@ class Handler:
 
     # 地域检索api
     def region_search(self, query, tag, region, get_all=True):
-        url = Url('http://api.map.baidu.com/place/v2/search')
+        url = Url('https://api.map.baidu.com/place/v2/search')
         url.set_map(self.raw_map)
 
         params = {
@@ -51,7 +51,7 @@ class Handler:
     # 圆形区域检索api
     # 查找请求, 经纬度(逗号分隔), 查找半径(米)
     def circle_search(self, query, tag, location, radius, filter=None):
-        url = Url('http://api.map.baidu.com/place/v2/search')
+        url = Url('https://api.map.baidu.com/place/v2/search')
         url.set_map(self.raw_map)
 
         params = {
@@ -81,7 +81,7 @@ class Handler:
 
     # 批量算路
     def path_search(self, way, org_location, dst_locations):
-        url = Url('http://api.map.baidu.com/routematrix/v2/{0}'.format(way))
+        url = Url('https://api.map.baidu.com/routematrix/v2/{0}'.format(way))
         url.set_map(self.raw_map)
 
         paths = []
@@ -276,7 +276,7 @@ class Parse:
             self.driver.get(url)
             id_pattern = re.search(r'dt-(\d+)', self.driver.page_source)
             id_ = id_pattern.group(1)
-            detail_url = 'http://hotel.qunar.com/city/shanghai_city/dt-{0}'
+            detail_url = 'https://hotel.qunar.com/city/shanghai_city/dt-{0}'
 
             r = requests.get(detail_url.format(id_))
             r.encoding = 'utf-8'
