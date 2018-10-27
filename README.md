@@ -85,6 +85,7 @@ pip install pandas
 pip install requests
 pip install selenium
 pip install selenium
+pip install openpyxl
 pip install xlrd
 ```
 
