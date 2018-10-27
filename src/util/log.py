@@ -50,7 +50,12 @@ class Counter:
             self.count += num
 
     def show(self):
+        '''
         sys.stdout.write('\r%s: %d%%' % (self.name,
+                                         self.count / self.length * 100))
+        '''
+
+        sys.stdout.write('%s: %d%%\n' % (self.name,
                                          self.count / self.length * 100))
         sys.stdout.flush()
 

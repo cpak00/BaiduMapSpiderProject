@@ -44,5 +44,5 @@ class Controller:
             except Exception as e:
                 logging.error(repr(e))
                 continue
-        
+
         return successful_result
