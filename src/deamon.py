@@ -46,7 +46,7 @@ class Deamon:
 
     # 等待一小时
     def wait_hour(self, num):
-        self.s_print('\r%d.等待一小时' % (num))
+        self.s_print('%d.等待一小时\n' % (num))
         time.sleep(60 * 60)
 
     def _read_list(self):

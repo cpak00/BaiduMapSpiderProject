@@ -22,7 +22,6 @@ def getLogger(tag, log_rank=logging.WARNING):
         tag,
         when='MIDNIGHT'
     )
-    
     fh.suffix = "_%Y-%m-%d.log"
     fh.setLevel(log_rank)
     formatter = logging.Formatter(
