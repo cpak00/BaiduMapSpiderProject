@@ -45,8 +45,8 @@ class Deamon:
                 break
 
     # 等待一小时
-    def wait_hour(self):
-        self.s_print('\r等待一小时')
+    def wait_hour(self, num):
+        self.s_print('\r%d.等待一小时' % (num))
         time.sleep(60 * 60)
 
     def _read_list(self):
@@ -109,7 +109,8 @@ class Deamon:
                 self.s_print('终止原因: %s\n' % (reason))
                 if '配额超限' in reason or 'request over' in reason:
                     # self.wait_day()
-                    self.wait_hour()
+                    for i in range(0, 7):
+                        self.wait_hour(i)
                 else:
                     break
 
