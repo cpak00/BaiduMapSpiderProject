@@ -22,6 +22,7 @@ class Deamon:
         self.s_print('当前环境: %s' % (environment))
 
         logging.info('Deamon初始化')
+        self.complete_success_num = 0
         self.localday = int(time.strftime('%d', time.localtime()))
         self.ak_key = readkey.get_key()
         self.shop_filename = config.shop_filename
@@ -72,7 +73,7 @@ class Deamon:
                     successful.append(bar.strip())
         else:
             successful = result
-            
+
         return successful
 
     # 获取以完成的结果
@@ -96,6 +97,12 @@ class Deamon:
                 '实际': real_name,
                 '已完成': successful
             }, ignore_index=True)
+        
+        # 记录完成情况
+        logging.info('当前完成情况: %d/%d' % (len(self.complete.index),
+                                        len(self.shop.index)))
+        logging.info('其中全部完成的为: %d' % (self.complete_success_num))
+
         self.complete.to_excel(config.complete_filename)
 
     # 守护api执行, 出错作出处理
@@ -145,15 +152,16 @@ class Deamon:
                     successful)
                 logging.info('%s 完成, 成功: %s' % (shop_name, successful))
 
-                # 存储已完成结果
-                self.save_successful(real_name, successful)
-                successful_num += 1
-
                 if set(successful) == set(config.content.keys()):
+                    self.complete_success_num += 1
                     logging.info('%s 全部完成' % (shop_name))
                 else:
                     logging.info('%s 继续' % (shop_name))
                     i = i - 1
+
+                # 存储已完成结果
+                self.save_successful(real_name, successful)
+                successful_num += 1
 
             except Exception as e:
                 logging.error(repr(e))
