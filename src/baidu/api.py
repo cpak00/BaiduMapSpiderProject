@@ -79,6 +79,17 @@ class Handler:
         logging.info('共{0}个结果'.format(str(len(results))))
         return results
 
+    # 获取坐标
+    def get_location(self, address, city=None):
+        url = Url('http://api.map.baidu.com/geocoder/v2/')
+        url.set_map(self.raw_map)
+
+        url.set_param('address', address)
+        if city:
+            url.set_param('city', city)
+        
+        return self._get_result(url)
+
     # 批量算路
     def path_search(self, way, org_location, dst_locations):
         url = Url('https://api.map.baidu.com/routematrix/v2/{0}'.format(way))
@@ -129,6 +140,8 @@ class Handler:
             except requests.exceptions.RequestException:
                 logging.error('网络连接异常')
                 return None
+            except KeyError:
+                logging.warning(json['msg'])
 
     # 获取请求列表
     def _get_list(self, url):

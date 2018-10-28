@@ -17,6 +17,7 @@ def location_parse(location):
 
 
 def find_location(shop_name, address):
+    '''
     infos = map_handler.region_search(address, '', '上海')
     if len(infos) > 0:
         location = location_parse(infos[0]['location'])
@@ -28,7 +29,6 @@ def find_location(shop_name, address):
         print('没找到 %s' % (shop_name))
         return '', ''
         
-        '''
         # 常规
         infos = map_handler.region_search(address, '', '上海', get_all=False)
         if infos and len(infos) > 0:
@@ -40,6 +40,17 @@ def find_location(shop_name, address):
             print('没找到 %s' % (shop_name))
             return '', ''
         '''
+    info = {}
+    try:
+        info = map_handler.get_location(address, '上海市')
+    except api.ApiError:
+        print('没找到 %s' % (shop_name))
+        return '', '', '0'
+    location = location_parse(info['location'])
+    confidence = info['confidence']
+    print('查找:%s 实际:%s 位置:%s 可信:%s' % (shop_name, address, location,
+                                       confidence))
+    return address, location, confidence
 
 
 def find_all():
@@ -50,7 +61,7 @@ def find_all():
     save_filename = config.shop_filename
 
     if not path.exists(save_filename):
-        save = pd.DataFrame(columns=['查找', '实际', '坐标'])
+        save = pd.DataFrame(columns=['查找', '实际', '坐标', '可信度'])
     else:
         save = pd.read_excel(save_filename)
 
@@ -69,11 +80,17 @@ def find_all():
             continue
 
         address = df['地址'][i]
-        real_name, location = find_location(shop_name, address)
-        row = pd.Series({'查找': shop_name, '实际': real_name, '坐标': location})
+        real_name, location, confidence = find_location(shop_name, address)
+        row = pd.Series({
+            '查找': shop_name,
+            '实际': real_name,
+            '坐标': location,
+            '可信度': confidence
+        })
         if (len(result)):
             save.loc[result.index[0], '实际'] = real_name
             save.loc[result.index[0], '坐标'] = location
+            save.loc[result.index[0], '可信度'] = confidence
         else:
             save = save.append(row, ignore_index=True)
         save.to_excel(save_filename)

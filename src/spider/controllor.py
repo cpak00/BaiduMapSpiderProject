@@ -15,7 +15,8 @@ class Controller:
         self.collector = collector.Collector(ak_key)
         pass
 
-    def run(self, shop_name, real_name, shop_location, save_handler, filter=[]):
+    def run(self, shop_name, real_name, shop_location, save_handler,
+            filter=[]):
         # 成功爬取的结果
         successful_result = filter
         # 构造存储器

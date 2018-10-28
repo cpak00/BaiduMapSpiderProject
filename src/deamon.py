@@ -20,7 +20,7 @@ logging = log.getLogger('deamon.log', log.INFO)
 class Deamon:
     def __init__(self):
         environment = ','.join(platform.architecture())
-        self.s_print('当前环境: %s' % (environment))
+        self.s_print('当前环境: %s\n' % (environment))
 
         logging.info('Deamon初始化')
         self.complete_success_num = 0
@@ -102,6 +102,7 @@ class Deamon:
         # 记录完成情况
         logging.info('当前完成情况: %d/%d' % (len(self.complete.index),
                                         len(self.shop.index)))
+        # 有误差
         logging.info('其中全部完成的为: %d' % (self.complete_success_num))
 
         self.complete.to_excel(config.complete_filename)
