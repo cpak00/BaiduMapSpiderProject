@@ -8,6 +8,7 @@ import numpy as np
 from config import config
 from util import log
 from util import readkey
+from util import pid
 import time
 import sys
 import platform
@@ -183,6 +184,9 @@ class Deamon:
 
 
 if __name__ == '__main__':
+    # 打印工作目录
     chdir.print_chdir()
+    # 打印主进程号
+    pid.print_pid()
     deamon = Deamon()
     deamon.main()
